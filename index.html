@@ -1,26 +1,47 @@
 <!doctype html>
-<html>
-
+<html lang="en">
 <head>
-  <title>FetchInLink</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cute Baby Image 👶💙</title>
+
+  <!-- Open Graph (WhatsApp) -->
   <meta property="og:title" content="Cute Baby Image 👶💙">
   <meta property="og:description" content="A beautiful and adorable baby image for you. Click to view now!">
-  <meta property="og:image" content="https://d1pis9vhhsjhwp.cloudfront.net/preview.jpg">
-  <meta property="og:image:secure_url" content="https://d1pis9vhhsjhwp.cloudfront.net/preview.jpg">
-  <meta property="og:image:type" content="image/jpg">
+
+  <!-- Use your GitHub Pages image -->
+  <meta property="og:image" content="https://rajupusti.github.io/baby/preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://d1pis9vhhsjhwp.cloudfront.net/">
+
+  <!-- Your actual page -->
+  <meta property="og:url" content="https://rajupusti.github.io/baby/">
   <meta property="og:type" content="website">
+
+  <!-- Twitter fallback -->
   <meta name="twitter:card" content="summary_large_image">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="script.js"></script>
+  <meta name="twitter:title" content="Cute Baby Image 👶💙">
+  <meta name="twitter:description" content="A beautiful and adorable baby image for you. Click to view now!">
+  <meta name="twitter:image" content="https://rajupusti.github.io/baby/preview.jpg">
+<script src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-  <div class="flex items-center justify-center h-screen bg-gray-400">
-    <div class="w-16 h-16 border-4 border-red-700 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-</body>
+  <div class="flex items-center justify-center h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-200">
+  <div class="flex flex-col items-center gap-4">
 
+    <!-- Spinner -->
+    <div class="w-16 h-16 border-4 border-pink-500 border-t-transparent rounded-full animate-spin"></div>
+
+    <!-- Text -->
+    <p class="text-gray-700 font-medium animate-pulse">
+      Loading something cute... 👶💙
+    </p>
+
+  </div>
+</div>
+</body>
 </html>
